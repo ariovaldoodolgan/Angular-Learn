@@ -1,0 +1,23 @@
+pool:
+  name: 'Default'
+  demands:
+  - npm
+  - node.js
+
+steps:
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: '$(Build.SourcesDirectory)/AngularLearn'
+    verbose: false
+
+- task:
+  displayName: 'npm custom'
+  inputs:
+    command: custom
+    workingDir: '$(Build.SourcesDirectory)/AngularLearn'
+    verbose: false
+    customCommand: 'run build'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
